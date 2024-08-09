@@ -1,0 +1,38 @@
+name: Test Message Send
+on: 
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Send Message
+        id: slack # IMPORTANT: reference this step ID value in future Slack steps
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: ./
+        with:
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          status: STARTING
+          color: warning  
+
+      - name: Wait 5 seconds
+        run: sleep 5
+
+      - name: Update Message
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: ./
+        with:
+          message_id: ${{ steps.slack.outputs.message_id }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          status: Updated
+          color: good
