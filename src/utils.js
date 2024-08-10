@@ -4,6 +4,7 @@ function buildSlackAttachments({ status, color, github }) {
   const { payload, ref, workflow, eventName } = github.context;
   const { owner, repo } = context.repo;
   const event = eventName;
+  const user = payload.sender.login;
   const branch =
     event === "pull_request"
       ? payload.pull_request.head.ref
@@ -51,6 +52,11 @@ function buildSlackAttachments({ status, color, github }) {
         {
           title: "Event",
           value: event,
+          short: true,
+        },
+        {
+          title: "User",
+          value: `<https://github.com/${user} | ${user}>`,
           short: true,
         },
       ],

@@ -1,4 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+npm install
+npm run build
+git add dist/index.js
+npm run format
 npx lint-staged
