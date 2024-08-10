@@ -38034,9 +38034,9 @@ function buildSlackAttachments({ status, color, github }) {
         },
         {
           title: "User",
-          value: `<https://github.com/${user}> | ${user}`,
+          value: `<https://github.com/${user} | ${user}>`,
           short: true,
-        }
+        },
       ],
       footer_icon: "https://github.githubassets.com/favicon.ico",
       footer: `<https://github.com/${owner}/${repo} | ${owner}/${repo}>`,

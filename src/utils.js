@@ -56,7 +56,7 @@ function buildSlackAttachments({ status, color, github }) {
         },
         {
           title: "User",
-          value: `<https://github.com/${user}> | ${user}`,
+          value: `<https://github.com/${user} | ${user}>`,
           short: true,
         },
       ],
